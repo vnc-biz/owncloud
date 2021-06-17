@@ -1,0 +1,13 @@
+{{- if .Values.persistence.enabled -}}
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: {{ include "owncloud.fullname" . }}
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-standard
+reclaimPolicy: Retain
+allowVolumeExpansion: true
+mountOptions:
+  - debug
+{{- end -}}

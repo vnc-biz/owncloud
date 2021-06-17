@@ -1,0 +1,28 @@
+{{- if .Values.persistence.owncloud.nfs.enabled -}}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ include "owncloud.fullname" . }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 100Gi
+  nfs:
+    server: {{ .Values.persistence.owncloud.nfs.server }}
+    path: {{ .Values.persistence.owncloud.nfs.path }}
+{{end}}
+---
+{{- if .Values.persistence.enabled -}}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "owncloud.fullname" . }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: standard
+{{- end -}}
