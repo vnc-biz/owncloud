@@ -25,10 +25,7 @@ persistence:
   owncloud:
     accessMode: ReadWriteOnce
     size: 8Gi
-    nfs:
-      # enabled: true
-      # server: ""
-      # path: ""
+    nfs: {}
 
 redis:
   enabled: false
