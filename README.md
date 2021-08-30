@@ -1,8 +1,26 @@
-# owncloud
+![alt text](https://github.com/vnc-biz/owncloud/blob/documentation/owncloud.png?raw=true) 
 
 ![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
 
-A Helm chart for Kubernetes
+# Owncloud; Chart packaged by VNC
+
+Fully control where your data is stored at all times
+You can deploy ownCloud in your own data center on-premises, at a trusted service provider or choose ownCloud.online, our Software-as-a-Service collaboration platform hosted in Germany.
+
+Be confident your data storage and maintenance complies with regulation. Increase security through measures like multi-factor authentication, encryption and file lifecycle management.
+
+## TL;DR
+
+```bash
+$ helm repo add owncloud 
+$ helm install my-release owncloud/owncloud
+```
+
+## Introduction
+
+This chart bootstraps an Owncloud deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+
+This chart has been tested to work with NGINX/GCE Ingress, fluentd and Prometheus on top of the [GKE].
 
 ## Values
 
