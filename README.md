@@ -10,7 +10,7 @@ ownCloud is a file sync & share product, where you can fully control where your 
 You can deploy ownCloud in your own data center on-premises or at a trusted service provider.
 Be confident your data storage and maintenance complies with regulation. Increase security through measures like multi-factor authentication, encryption and file lifecycle management.
 
-VNC created this Helm Chart using our experience writing Helm Charts for our own VNClagoon
+VNC created this Helm Chart using our experience writing Helm Charts for our own [VNClagoon](http://www.vnclagoon.com/)
 applications to deploy ownCloud on public cloud and bare metal Kubernetes clusters. 
 We enabled persistent data volumes so that we can scale ownCloud and enable HA.
 
