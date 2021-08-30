@@ -1,13 +1,18 @@
-![alt text](https://github.com/vnc-biz/owncloud/blob/documentation/owncloud.png?raw=true) 
+![alt text](https://github.com/vnc-biz/owncloud/blob/main/owncloud.png?raw=true) 
 
 ![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
 
-# Owncloud; Chart packaged by VNC
+# ownCloud; Chart packaged by VNC
 
-Fully control where your data is stored at all times
-You can deploy ownCloud in your own data center on-premises, at a trusted service provider or choose ownCloud.online, our Software-as-a-Service collaboration platform hosted in Germany.
+What is ownCloud?
 
+ownCloud is a file sync & share product, where you can fully control where your data is stored at all times.
+You can deploy ownCloud in your own data center on-premises or at a trusted service provider.
 Be confident your data storage and maintenance complies with regulation. Increase security through measures like multi-factor authentication, encryption and file lifecycle management.
+
+VNC created this Helm Chart using our experience writing Helm Charts for our own VNClagoon
+applications to deploy ownCloud on public cloud and bare metal Kubernetes clusters. 
+We enabled persistent data volumes so that we can scale ownCloud and enable HA.
 
 ## TL;DR
 
