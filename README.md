@@ -23,7 +23,7 @@ $ helm install my-release owncloud/owncloud
 
 ## Introduction
 
-This chart bootstraps an Owncloud deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+This chart bootstraps an ownCloud deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 This chart has been tested to work with NGINX/GCE Ingress, fluentd and Prometheus on top of the [GKE].
 
