@@ -30,7 +30,7 @@ spec:
       initContainers:
         - name: "init-{{ .Chart.Name }}"
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          command: ['sh', '-c', "mkdir -p {{ .Values.owncloud.volume_apps }} {{ .Values.owncloud.volume_config }} {{ .Values.owncloud.volume_files }}; chown -R www-data:www-data {{ .Values.owncloud.volume_root }}"]
+          command: ['sh', '-c', "mkdir -p {{ .Values.owncloud.volume_apps }} {{ .Values.owncloud.volume_config }} {{ .Values.owncloud.volume_files }} {{ .Values.owncloud.volume_root }}/sessions; chown -R www-data:www-data {{ .Values.owncloud.volume_root }}"]
           volumeMounts:
           - name: owncloud-data
             mountPath: {{ .Values.owncloud.volume_root }}
