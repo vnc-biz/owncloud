@@ -27,6 +27,14 @@ spec:
       serviceAccountName: {{ include "owncloud.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: "init-{{ .Chart.Name }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          command: ['sh', '-c', "mkdir -p {{ .Values.owncloud.volume_apps }} {{ .Values.owncloud.volume_config }} {{ .Values.owncloud.volume_files }} {{ .Values.owncloud.volume_root }}/sessions; chown -R www-data:www-data {{ .Values.owncloud.volume_root }}"]
+          volumeMounts:
+          - name: owncloud-data
+            mountPath: {{ .Values.owncloud.volume_root }}
+
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -36,6 +44,18 @@ spec:
           env:
           - name: OWNCLOUD_DOMAIN
             value: {{ .Values.owncloudDomain | quote }}
+          - name: OWNCLOUD_SKIP_CHMOD
+            value: "true"
+          - name: OWNCLOUD_SKIP_CHOWN
+            value: "true"
+          - name: OWNCLOUD_VOLUME_APPS
+            value: {{ .Values.owncloud.volume_apps | quote }}
+          - name: OWNCLOUD_VOLUME_CONFIG
+            value: {{ .Values.owncloud.volume_config | quote }}
+          - name: OWNCLOUD_VOLUME_FILES
+            value: {{ .Values.owncloud.volume_files | quote }}
+          - name: OWNCLOUD_VOLUME_ROOT
+            value: {{ .Values.owncloud.volume_root | quote }}
           - name: OWNCLOUD_ADMIN_USERNAME
             value: {{ .Values.owncloud.username | quote }}
           - name: OWNCLOUD_ADMIN_PASSWORD
@@ -77,6 +97,18 @@ spec:
           - name: OWNCLOUD_REDIS_HOST
             value: {{ .Values.redis.host | quote }}
           {{- end }}
+          {{- if .Values.owncloud.oidc.enabled }}
+          - name: OWNCLOUD_OIDC_PROVIDER_URL
+            value: {{ .Values.owncloud.oidc.providerurl | quote }}
+          - name: OWNCLOUD_OIDC_POST_LOGOUT_REDIRECT_URL
+            value: {{ .Values.owncloud.oidc.logouturl | quote }}
+          - name: OWNCLOUD_OIDC_CLIENT_ID
+            value: {{ .Values.owncloud.oidc.clientid | quote }}
+          - name: OWNCLOUD_OIDC_CLIENT_SECRET
+            value: {{ .Values.owncloud.oidc.clientsecret | quote }}
+          - name: OWNCLOUD_OIDC_SCOPES_API
+            value: {{ .Values.owncloud.oidc.scopesapi | quote }}
+          {{- end }}
           ports:
             - name: http
               containerPort: 8080
@@ -105,7 +137,12 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
           - name: owncloud-data
-            mountPath: /mnt/data
+            mountPath: {{ .Values.owncloud.volume_root }}
+          {{- if .Values.owncloud.oidc.enabled }}
+          - name: config-volume
+            mountPath: {{ .Values.owncloud.volume_config }}/docker.oidc.config.php
+            subPath: docker.oidc.config.php
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -122,3 +159,8 @@ spec:
         - name: owncloud-data
           persistentVolumeClaim:
             claimName: {{ include "owncloud.fullname" . }}
+        {{- if .Values.owncloud.oidc.enabled }}
+        - name: config-volume
+          configMap:
+            name: owncloud-config
+        {{- end }}

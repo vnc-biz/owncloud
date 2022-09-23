@@ -8,6 +8,17 @@ owncloud:
   domain: owncloud.chart.example
   username: owncloud
   password: owncloud
+  volume_apps: /mnt/data/apps
+  volume_config: /mnt/data/config
+  volume_files: /mnt/data/files
+  volume_root: /mnt/data
+  oidc:
+    enabled: true
+    providerurl: test
+    logouturl: test
+    clientid: test
+    clientsecret: test
+    scopesapi: test
 
 mariadb:
   enabled: false
@@ -34,7 +45,7 @@ image:
   repository: docker.io/owncloud/server
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 10.6
+  tag: "10.10"
 
 imagePullSecrets: []
 nameOverride: ""
