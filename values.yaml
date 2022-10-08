@@ -25,6 +25,7 @@ persistence:
   owncloud:
     accessMode: ReadWriteOnce
     size: 8Gi
+    storageClassName: ""
     nfs: {}
 
 redis:

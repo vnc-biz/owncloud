@@ -20,9 +20,9 @@ metadata:
   name: {{ include "owncloud.fullname" . }}
 spec:
   accessModes:
-    - ReadWriteOnce
+    - {{ .Values.persistence.owncloud.accessMode }}
   resources:
     requests:
-      storage: 100Gi
-  storageClassName: standard
+      storage: {{ .Values.persistence.owncloud.size }}
+  storageClassName: {{ .Values.persistence.owncloud.storageClassName }}
 {{- end -}}
