@@ -35,7 +35,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
           - name: OWNCLOUD_DOMAIN
-            value: {{ .Values.owncloudDomain | quote }}
+            value: {{ .Values.owncloud.domain | quote }}
           - name: OWNCLOUD_ADMIN_USERNAME
             value: {{ .Values.owncloud.username | quote }}
           - name: OWNCLOUD_ADMIN_PASSWORD
